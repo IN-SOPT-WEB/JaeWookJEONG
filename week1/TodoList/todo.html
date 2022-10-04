@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <title>Todo List</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__text">Todo List</h1>
+    </header>
+    <nav class="nav">
+      <button class="nav__today">오늘만 보기</button
+      ><button class="nav_tomorrow">내일만 보기</button>
+      <button class="nav_together">함께 보기</button>
+    </nav>
+    <main class="main">
+      <section class="section-today">
+        <header>
+          <h3 class="section-today__text">오늘 할 일</h3>
+        </header>
+        <footer class="section-today__footer">
+          <input class="section-today__input" type="text" />
+          <button class="section-today__button">+</button>
+        </footer>
+      </section>
+      <section class="section-tomorrow">
+        <div>
+          <header>
+            <h3>내일 할 일</h3>
+          </header>
+          <ul class="section-tomorrow__list">
+            <article class="section-tomorrow__items">
+              <li class="section-tomorrow__item">예시1</li>
+              <button class="material-symbols-outlined">delete</button>
+            </article>
+            <article class="section-tomorrow__items">
+              <li class="section-tomorrow__item">예시2</li>
+              <button class="material-symbols-outlined">delete</button>
+            </article>
+          </ul>
+        </div>
+        <footer class="section-tomorrow__footer">
+          <input class="section-tomorrow__input" type="text" />
+          <button class="section-tomorrow__button">+</button>
+        </footer>
+      </section>
+    </main>
+    <footer class="footer">
+      <span>Copyright ⓒ IN SOPT</span>
+    </footer>
+  </body>
+</html>
