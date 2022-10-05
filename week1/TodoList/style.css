@@ -21,8 +21,8 @@
 }
 
 .nav__today,
-.nav_tomorrow,
-.nav_together {
+.nav__tomorrow,
+.nav__together {
   margin-left: 1rem;
   cursor: pointer;
   outline: none;
