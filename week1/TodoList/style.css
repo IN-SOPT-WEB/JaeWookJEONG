@@ -82,17 +82,13 @@
   width: 100%;
 }
 
-.section-tomorrow__items {
+.section-tomorrow__item {
+  width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  border-bottom: 1px solid #47b5ff;
-}
-
-.section-tomorrow__item {
-  width: 100%;
   padding: 1rem 0.3rem;
+  border-bottom: 1px solid #47b5ff;
 }
 
 .material-symbols-outlined {
