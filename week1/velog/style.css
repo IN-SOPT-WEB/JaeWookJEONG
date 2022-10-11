@@ -44,12 +44,6 @@
   display: flex;
 }
 
-#nav__items--active {
-  outline: none;
-  cursor: pointer;
-  border-bottom: 2px solid black;
-}
-
 .nav--active {
   outline: none;
   cursor: pointer;
@@ -76,7 +70,6 @@
   align-items: center;
   margin-right: 0.5rem;
   color: gray;
-  margin-right: 1rem;
 }
 
 .nav--dropdown {
@@ -92,7 +85,6 @@
   background-color: white;
   border-radius: 4px;
   box-shadow: rgb(0 0 0 / 5%) 0px 0px 4px;
-  font-size: 1rem;
   font-size: 0.875rem;
 }
 
