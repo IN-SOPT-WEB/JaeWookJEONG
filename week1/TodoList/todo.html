@@ -12,6 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
     <title>Todo List</title>
+    <script src="todo.js" defer></script>
   </head>
   <body>
     <header class="header">
@@ -24,29 +25,17 @@
     </nav>
     <main class="main">
       <section class="section-today">
-        <h3 class="section-today__text">오늘 할 일</h3>
+        <div class="today">
+          <h3>오늘 할 일</h3>
+        </div>
         <footer class="section-today__footer">
           <input class="section-today__input" type="text" />
           <button type="button" class="section-today__button">+</button>
         </footer>
       </section>
       <section class="section-tomorrow">
-        <div>
+        <div class="tomorrow">
           <h3>내일 할 일</h3>
-          <ul class="section-tomorrow__list">
-            <li class="section-tomorrow__item">
-              <span>예시1</span>
-              <button type="button" class="material-symbols-outlined">
-                delete
-              </button>
-            </li>
-            <li class="section-tomorrow__item">
-              <span>예시2</span>
-              <button type="button" class="material-symbols-outlined">
-                delete
-              </button>
-            </li>
-          </ul>
         </div>
         <footer class="section-tomorrow__footer">
           <input class="section-tomorrow__input" type="text" />
