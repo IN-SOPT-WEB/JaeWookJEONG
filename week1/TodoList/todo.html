@@ -12,7 +12,6 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
     <title>Todo List</title>
-    <script src="todo.js" defer></script>
   </head>
   <body>
     <header class="header">
@@ -25,8 +24,9 @@
     </nav>
     <main class="main">
       <section class="section-today">
-        <div class="today">
+        <div>
           <h3>오늘 할 일</h3>
+          <ul class="section-today__list"></ul>
         </div>
         <footer class="section-today__footer">
           <input class="section-today__input" type="text" />
@@ -34,8 +34,9 @@
         </footer>
       </section>
       <section class="section-tomorrow">
-        <div class="tomorrow">
+        <div>
           <h3>내일 할 일</h3>
+          <ul class="section-tomorrow__list"></ul>
         </div>
         <footer class="section-tomorrow__footer">
           <input class="section-tomorrow__input" type="text" />
@@ -47,4 +48,5 @@
       <span>Copyright ⓒ IN SOPT</span>
     </footer>
   </body>
+  <script src="./todo.js"></script>
 </html>
