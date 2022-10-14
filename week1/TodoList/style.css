@@ -99,3 +99,8 @@
   outline: none;
   cursor: pointer;
 }
+
+.hidden {
+  width: 0;
+  display: none;
+}
