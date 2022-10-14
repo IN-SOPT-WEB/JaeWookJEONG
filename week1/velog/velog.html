@@ -43,7 +43,9 @@
       <div class="header__info">
         <span class="material-symbols-outlined">light_mode</span>
         <span class="material-symbols-outlined">search</span>
-        <button type="button" class="header__write">새 글 작성</button>
+        <a href="./tag/tag.html">
+          <button type="button" class="header__write">새 글 작성</button>
+        </a>
         <img class="header__user" src="./image/user.png" alt="user profile" />
       </div>
     </header>
@@ -57,8 +59,14 @@
         <span>최신</span>
       </button>
       <button type="button" class="nav--dropdown">
-        <span>이번주</span>
+        <span class="dropdown__text">오늘</span>
         <span class="material-symbols-outlined"> expand_more </span>
+        <ul class="dropdown__list">
+          <li class="dropdown__item">오늘</li>
+          <li class="dropdown__item">이번 주</li>
+          <li class="dropdown__item">이번 달</li>
+          <li class="dropdown__item">올해</li>
+        </ul>
       </button>
     </nav>
     <main class="main">
@@ -414,4 +422,5 @@
       </section>
     </main>
   </body>
+  <script src="./velog.js"></script>
 </html>
