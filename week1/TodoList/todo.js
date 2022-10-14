@@ -12,73 +12,82 @@ const tomorrowInputButtton = document.querySelector(
   ".section-tomorrow__button"
 );
 
-const onFullToday = () => {
-  rightSection.classList.add("hidden");
-  leftSection.classList.remove("hidden");
+const onMoveSection = (e) => {
+  switch (e.target.className) {
+    case "nav__today":
+      rightSection.classList.add("hidden");
+      rightSection.classList.remove("open");
+      leftSection.classList.add("open");
+      leftSection.classList.remove("hidden");
+      break;
+    case "nav__tomorrow":
+      leftSection.classList.add("hidden");
+      leftSection.classList.remove("open");
+      rightSection.classList.add("open");
+      rightSection.classList.remove("hidden");
+      break;
+    case "nav__together":
+      leftSection.classList.remove("hidden");
+      leftSection.classList.remove("open");
+      rightSection.classList.remove("hidden");
+      rightSection.classList.remove("open");
+    default:
+      break;
+  }
 };
 
-const onFullTomorrow = () => {
-  leftSection.classList.add("hidden");
-  rightSection.classList.remove("hidden");
+const onDelete = (e) => {
+  if (e.target.parentElement.className === "section-today__item") {
+    todayList.removeChild(e.target.parentElement);
+  } else {
+    tomorrowList.removeChild(e.target.parentElement);
+  }
 };
 
-const onTogether = () => {
-  leftSection.classList.remove("hidden");
-  rightSection.classList.remove("hidden");
-};
+const onMakeElement = () => {
+  const li = document.createElement("li");
+  const text = document.createElement("span");
+  const remove = document.createElement("button");
+  remove.innerHTML = "delete";
+  remove.classList.add("material-symbols-outlined");
 
-const onDeleteToday = (e) => {
-  todayList.removeChild(e.target.parentElement);
-};
+  li.appendChild(text);
+  li.appendChild(remove);
 
-const onDeleteTomorrow = (e) => {
-  tomorrowList.removeChild(e.target.parentElement);
+  return { li, text, remove };
 };
 
 const onCreateToday = () => {
+  const { li, text, remove } = onMakeElement();
+
   if (todayInput.value === "") {
     alert("내용을 입력해주세요");
     return;
   }
 
-  const todayLi = document.createElement("li");
-  const todayText = document.createElement("span");
-  const todayDelete = document.createElement("button");
-  todayDelete.innerHTML = "delete";
-
-  todayLi.classList.add(`section-today__item`);
-  todayDelete.classList.add("material-symbols-outlined");
-
-  todayText.innerHTML = todayInput.value;
-  todayLi.appendChild(todayText);
-  todayLi.appendChild(todayDelete);
-  todayList.appendChild(todayLi);
+  li.classList.add(`section-today__item`);
+  text.innerHTML = todayInput.value;
+  todayList.appendChild(li);
   todayInput.value = "";
 
-  todayDelete.addEventListener("click", onDeleteToday);
+  remove.addEventListener("click", onDelete);
 };
 
 const onCreateTomorrow = () => {
+  const { li, text, remove } = onMakeElement();
+
   if (tomorrowInput.value === "") {
     alert("내용을 입력해주세요");
     return;
   }
-  const tomorrowLi = document.createElement("li");
-  const tomorrowText = document.createElement("span");
-  const tomorrowDelete = document.createElement("button");
-  tomorrowDelete.innerHTML = "delete";
 
-  tomorrowLi.classList.add("section-tomorrow__item");
-  tomorrowDelete.classList.add("material-symbols-outlined");
-
-  tomorrowText.innerHTML = tomorrowInput.value;
-  tomorrowLi.appendChild(tomorrowText);
-  tomorrowLi.appendChild(tomorrowDelete);
-  tomorrowList.appendChild(tomorrowLi);
+  li.classList.add("section-tomorrow__item");
+  text.innerHTML = tomorrowInput.value;
+  tomorrowList.appendChild(li);
 
   tomorrowInput.value = "";
 
-  tomorrowDelete.addEventListener("click", onDeleteTomorrow);
+  remove.addEventListener("click", onDelete);
 };
 
 todayInput.addEventListener("keypress", (e) => {
@@ -88,8 +97,8 @@ tomorrowInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") onCreateTomorrow();
 });
 
-todayButton.addEventListener("click", onFullToday);
-tomorrowButton.addEventListener("click", onFullTomorrow);
-togetherButton.addEventListener("click", onTogether);
+todayButton.addEventListener("click", onMoveSection);
+tomorrowButton.addEventListener("click", onMoveSection);
+togetherButton.addEventListener("click", onMoveSection);
 todayInputButton.addEventListener("click", onCreateToday);
 tomorrowInputButtton.addEventListener("click", onCreateTomorrow);
