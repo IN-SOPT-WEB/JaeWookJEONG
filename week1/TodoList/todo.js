@@ -1,5 +1,8 @@
 const leftSection = document.querySelector(".section-today");
 const rightSection = document.querySelector(".section-tomorrow");
+const todayButton = document.querySelector(".nav__today");
+const tomorrowButton = document.querySelector(".nav__tomorrow");
+const togetherButton = document.querySelector(".nav__together");
 const todayList = document.querySelector(".section-today__list");
 const todayInput = document.querySelector(".section-today__input");
 const todayInputButton = document.querySelector(".section-today__button");
@@ -8,7 +11,21 @@ const tomorrowInput = document.querySelector(".section-tomorrow__input");
 const tomorrowInputButtton = document.querySelector(
   ".section-tomorrow__button"
 );
-const watchTodayButton = document.querySelector(".nav__today");
+
+const onFullToday = () => {
+  rightSection.classList.add("hidden");
+  leftSection.classList.remove("hidden");
+};
+
+const onFullTomorrow = () => {
+  leftSection.classList.add("hidden");
+  rightSection.classList.remove("hidden");
+};
+
+const onTogether = () => {
+  leftSection.classList.remove("hidden");
+  rightSection.classList.remove("hidden");
+};
 
 const onDeleteToday = (e) => {
   todayList.removeChild(e.target.parentElement);
@@ -71,5 +88,8 @@ tomorrowInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") onCreateTomorrow();
 });
 
+todayButton.addEventListener("click", onFullToday);
+tomorrowButton.addEventListener("click", onFullTomorrow);
+togetherButton.addEventListener("click", onTogether);
 todayInputButton.addEventListener("click", onCreateToday);
 tomorrowInputButtton.addEventListener("click", onCreateTomorrow);
