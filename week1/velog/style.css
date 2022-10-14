@@ -87,11 +87,7 @@
   border-radius: 4px;
   box-shadow: rgb(0 0 0 / 5%) 0px 0px 4px;
   font-size: 0.875rem;
-}
-
-.nav--dropdown span:last-child {
-  margin-left: 0.5rem;
-  margin-right: 0;
+  width: 6rem;
 }
 
 .main {
@@ -176,7 +172,7 @@
 .dropdown__list {
   position: absolute;
   top: 20px;
-  left: 120px;
+  left: 135px;
   list-style: none;
   padding: 0;
   background-color: white;
