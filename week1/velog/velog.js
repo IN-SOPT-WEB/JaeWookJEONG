@@ -5,11 +5,11 @@ const dropdownItem = document.querySelectorAll(".dropdown__item");
 
 const onDropdown = (e) => {
   dropdownText.innerHTML = e.target.innerHTML;
-  e.target.classList.add("dropdown__item--check");
+  e.target.style.color = "#12b886";
 
   for (let i = 0; i < dropdownItem.length; i++) {
     if (dropdownItem[i].innerHTML !== e.target.innerHTML) {
-      dropdownItem[i].classList.remove("dropdown__item--check");
+      dropdownItem[i].style.color = "black";
     }
   }
 };
