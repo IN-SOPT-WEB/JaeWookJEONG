@@ -1,0 +1,28 @@
+.tag__section {
+  display: flex;
+  align-items: center;
+}
+.tag__list {
+  display: flex;
+  list-style: none;
+}
+
+.tag__item {
+  background: #f8f9fa;
+  padding: 0 1rem;
+  height: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  margin-right: 0.875rem;
+  color: #12b886;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.tag__input {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
