@@ -2,11 +2,13 @@
 
 ## styled-components는 CSS-in-JS 라이브러리 입니다.
 
+<br>
+
 💡 CSS-in-JS란?
 
 JavaScript로 작성된 컴포넌트에 바로 삽입하는 스타일 기법
 
-컴포넌트 기반 개발 방법이 주류로 자리잡음으로써 JavaScipt,HTML 뿐만 아니라 CSS도 컴포넌트에 삽입 할 수 있는 CSS-in-JS가 유행하고 있다.
+컴포넌트 기반 개발 방법이 주류로 자리잡음으로써 JavaScript,HTML 뿐만 아니라 CSS도 컴포넌트에 삽입 할 수 있는 CSS-in-JS가 유행하고 있다.
 
 `css 파일을 밖에 두지 않고, 컴포넌트 내부에 넣기 때문에 css가 중첩되지 않는다는 장점이 있습니다!`
 
@@ -14,7 +16,7 @@ JavaScript로 작성된 컴포넌트에 바로 삽입하는 스타일 기법
 
 ### 고정 스타일
 
-고정 스타일을 만들어두고 다른 React 컴포넌트에서 쉽게 불러와 사용할 수 있다.
+고정 스타일을 만들어두고 다른 React 컴포넌트에서 쉽게 불러 사용할 수 있다.
 
 ```jsx
 import React from "react";
