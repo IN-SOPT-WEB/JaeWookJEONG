@@ -24,7 +24,10 @@
     </nav>
     <main class="main">
       <section class="section-today">
-        <h3 class="section-today__text">오늘 할 일</h3>
+        <div>
+          <h3>오늘 할 일</h3>
+          <ul class="section-today__list"></ul>
+        </div>
         <footer class="section-today__footer">
           <input class="section-today__input" type="text" />
           <button type="button" class="section-today__button">+</button>
@@ -33,20 +36,7 @@
       <section class="section-tomorrow">
         <div>
           <h3>내일 할 일</h3>
-          <ul class="section-tomorrow__list">
-            <li class="section-tomorrow__item">
-              <span>예시1</span>
-              <button type="button" class="material-symbols-outlined">
-                delete
-              </button>
-            </li>
-            <li class="section-tomorrow__item">
-              <span>예시2</span>
-              <button type="button" class="material-symbols-outlined">
-                delete
-              </button>
-            </li>
-          </ul>
+          <ul class="section-tomorrow__list"></ul>
         </div>
         <footer class="section-tomorrow__footer">
           <input class="section-tomorrow__input" type="text" />
@@ -58,4 +48,5 @@
       <span>Copyright ⓒ IN SOPT</span>
     </footer>
   </body>
+  <script src="./todo.js"></script>
 </html>

@@ -77,12 +77,14 @@
   color: white;
 }
 
-.section-tomorrow__list {
+.section-tomorrow__list,
+.section-today__list {
   list-style: none;
   width: 100%;
 }
 
-.section-tomorrow__item {
+.section-tomorrow__item,
+.section-today__item {
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -96,4 +98,14 @@
   border: none;
   outline: none;
   cursor: pointer;
+}
+
+.open {
+  width: 100%;
+}
+
+.hidden {
+  width: 0;
+  display: none;
+  overflow: hidden;
 }
