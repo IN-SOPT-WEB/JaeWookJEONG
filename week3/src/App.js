@@ -28,6 +28,7 @@ const App = () => {
 
   const onReset = () => {
     setScore(0);
+    setIsFinish(false);
   };
 
   const onClose = () => {
@@ -37,25 +38,31 @@ const App = () => {
   return (
     <>
       {modal && <Modal ref={modalEl} onClose={onClose} quiz={quiz} />}
-      {isFinish === false ? (
-        <Container>
-          <HeaderBlock>월드컵에 과몰입 해보자!</HeaderBlock>
-          <ContentBlock>
-            <ScoreBlock>{score}</ScoreBlock>
-            <Image src={quizList[score].src} alt={quizList[score].alt} />
-            <ButtonBlock>
-              {quizAnswer.map(quiz => (
-                <CheckButton key={quiz.id} onClick={() => onScore(quiz.answer)}>
-                  {quiz.answer}
-                </CheckButton>
-              ))}
-            </ButtonBlock>
-            <ResetButton onClick={onReset}>재도전</ResetButton>
-          </ContentBlock>
-        </Container>
-      ) : (
-        <span>1</span>
-      )}
+      <Container>
+        <HeaderBlock>월드컵에 과몰입 해보자!</HeaderBlock>
+        <ContentBlock>
+          <ScoreBlock>내 점수 : {score}</ScoreBlock>
+          {isFinish === false ? (
+            <>
+              <Image src={quizList[score].src} alt={quizList[score].alt} />
+              <ButtonBlock>
+                {quizAnswer.map(quiz => (
+                  <CheckButton key={quiz.id} onClick={() => onScore(quiz.answer)}>
+                    {quiz.answer}
+                  </CheckButton>
+                ))}
+              </ButtonBlock>
+              <ResetButton onClick={onReset}>재도전</ResetButton>
+            </>
+          ) : (
+            <>
+              <ScoreBlock>대한민국 퐈이팅~</ScoreBlock>
+              <Image src="img/Worldcup.jpeg" alt="finalImage" />
+              <ResetButton onClick={onReset}>재도전</ResetButton>
+            </>
+          )}
+        </ContentBlock>
+      </Container>
     </>
   );
 };
@@ -70,7 +77,7 @@ const Container = styled.div`
 const HeaderBlock = styled.h2`
   text-align: center;
 `;
-const ContentBlock = styled.h1`
+const ContentBlock = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,8 +85,9 @@ const ContentBlock = styled.h1`
 const Image = styled.img`
   width: 100%;
   height: 300px;
+  margin: 1rem;
 `;
-const ScoreBlock = styled.h3``;
+const ScoreBlock = styled.h2``;
 const ButtonBlock = styled.div`
   width: 100%;
   display: flex;
@@ -91,6 +99,7 @@ const CheckButton = styled(Button)`
   background-color: white;
   border: 1px solid ${palette.mainColor};
   border-radius: 7px;
+  padding: 0.3rem;
 `;
 const ResetButton = styled(Button)`
   width: 100%;
