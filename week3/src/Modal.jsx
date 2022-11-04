@@ -55,11 +55,12 @@ const WhiteBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 100;
 
   ${props =>
     props.correct &&
     css`
-      animation: smoothAppear 0.5s;
+      animation: smoothAppear 0.8s;
     `}
 `;
 const Title = styled.h3`
