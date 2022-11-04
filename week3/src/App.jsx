@@ -1,12 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from './components/Button';
 import Modal from './Modal';
 import { quizAnswer, quizList } from './quizAnswer';
+import GlobalStyles from './style/GlobalStyles';
 import palette from './style/palette';
 
 const App = () => {
-  const modalEl = useRef();
   const [score, setScore] = useState(0);
   const [isFinish, setIsFinish] = useState(false);
   const [modal, setModal] = useState(false);
@@ -37,7 +37,8 @@ const App = () => {
 
   return (
     <>
-      {modal && <Modal ref={modalEl} onClose={onClose} quiz={quiz} />}
+      <GlobalStyles />
+      {modal && <Modal onClose={onClose} quiz={quiz} setModal={setModal} />}
       <Container>
         <HeaderBlock>월드컵에 과몰입 해보자!</HeaderBlock>
         <ContentBlock>
@@ -100,6 +101,12 @@ const CheckButton = styled(Button)`
   border: 1px solid ${palette.mainColor};
   border-radius: 7px;
   padding: 0.3rem;
+
+  &:hover {
+    background-color: ${palette.mainColor};
+    color: white;
+    font-weight: bold;
+  }
 `;
 const ResetButton = styled(Button)`
   width: 100%;
