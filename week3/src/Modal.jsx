@@ -1,24 +1,36 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useRef } from 'react';
+import styled, { css } from 'styled-components';
 import Button from './components/Button';
 import palette from './style/palette';
 
-const Modal = ({ onClose, quiz }) => {
+const Modal = ({ onClose, quiz, setModal }) => {
+  const modelEl = useRef();
+
+  useEffect(() => {
+    const onClickOutside = e => {
+      if (modelEl && modelEl.current.contains(e.target)) {
+        setModal(false);
+      }
+    };
+    document.addEventListener('mousedown', onClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', onClickOutside);
+    };
+  }, [setModal]);
+
   return (
-    <Container>
-      <WhiteBox>
-        {quiz === true ? (
-          <>
-            <Title>정답입니다!</Title>
-            <CloseButton onClick={onClose}>닫기</CloseButton>
-          </>
-        ) : (
-          <>
-            <Title>땡,,,</Title>
-            <CloseButton onClick={onClose}>닫기</CloseButton>
-          </>
-        )}
-      </WhiteBox>
+    <Container ref={modelEl}>
+      {quiz === true ? (
+        <WhiteBox correct>
+          <Title>정답입니다!</Title>
+          <CloseButton onClick={onClose}>닫기</CloseButton>
+        </WhiteBox>
+      ) : (
+        <WhiteBox>
+          <Title>땡,,,</Title>
+          <CloseButton onClick={onClose}>닫기</CloseButton>
+        </WhiteBox>
+      )}
     </Container>
   );
 };
@@ -43,6 +55,12 @@ const WhiteBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  ${props =>
+    props.correct &&
+    css`
+      animation: smoothAppear 0.5s;
+    `}
 `;
 const Title = styled.h3`
   text-align: center;
