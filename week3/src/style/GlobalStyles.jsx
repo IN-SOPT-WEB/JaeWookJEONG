@@ -1,3 +1,6 @@
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyles = createGlobalStyle`
 /* Global CSS */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
@@ -6,7 +9,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   box-sizing: border-box;
-  padding: 0;
   min-height: 100%;
 }
 
@@ -30,3 +32,18 @@ a {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+@keyframes smoothAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-5%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+`;
+
+export default GlobalStyles;
