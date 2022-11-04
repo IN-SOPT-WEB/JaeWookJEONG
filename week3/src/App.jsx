@@ -83,10 +83,13 @@ const ContentBlock = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
 const Image = styled.img`
-  width: 100%;
+  width: 300px;
   height: 300px;
   margin: 1rem;
+  border-radius: 50%;
+  filter: drop-shadow(5px 5px 5px #000);
 `;
 const ScoreBlock = styled.h2``;
 const ButtonBlock = styled.div`
