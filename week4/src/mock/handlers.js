@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 const handlers = [
-  rest.get('/api/products', async (req, res, ctx) => {
+  rest.get('/api/users', async (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.delay(400),
