@@ -7,9 +7,19 @@ import {
   Heading,
   Box,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Header = () => {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    const getGithub = async () => {
+      const res = await axios.get('/api/products');
+      setUsers(res.data.items);
+    };
+    getGithub();
+  }, []);
+
   return (
     <Box>
       <Heading>Github Profile Finder</Heading>
@@ -25,30 +35,11 @@ const Header = () => {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              <Box flex="1" textAlign="left">
-                Section 1 title
-              </Box>
-              <Box flex="1" textAlign="left">
-                Section 1 title
-              </Box>
-              <Box flex="1" textAlign="left">
-                Section 1 title
-              </Box>
-              <Box flex="1" textAlign="left">
-                Section 1 title
-              </Box>
-              <Box flex="1" textAlign="left">
-                Section 1 title
-              </Box>
-              <Box flex="1" textAlign="left">
-                Section 1 title
-              </Box>
-              <Box flex="1" textAlign="left">
-                Section 1 title
-              </Box>
-              <Box flex="1" textAlign="left">
-                Section 1 title
-              </Box>
+              {users.map(user => (
+                <Box key={user.id} flex="1" textAlign="left">
+                  {user.user}
+                </Box>
+              ))}
             </AccordionPanel>
           </AccordionItem>
         </AccordionItem>
