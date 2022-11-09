@@ -1,15 +1,8 @@
 import React from 'react';
-import Content from './components/Content';
-import Header from './components/Header';
-import Layout from './components/Layout';
+import Router from './Router';
 
 const App = () => {
-  return (
-    <Layout>
-      <Header />
-      <Content />
-    </Layout>
-  );
+  return <Router />;
 };
 
 export default App;
