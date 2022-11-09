@@ -19,10 +19,6 @@ const Header = () => {
     setInputs('');
   };
 
-  const onMoveUser = username => {
-    navigate(`/search/${username}`);
-  };
-
   useEffect(() => {
     const getGithub = async () => {
       const res = await getUserList();
@@ -41,7 +37,9 @@ const Header = () => {
         <Breadcrumb>
           {usersList.map(user => (
             <BreadcrumbItem key={user.id}>
-              <BreadcrumbLink onClick={() => onMoveUser(user.github)}>{user.user}</BreadcrumbLink>
+              <BreadcrumbLink onClick={() => navigate(`/search/${user.github}`)}>
+                {user.user}
+              </BreadcrumbLink>
             </BreadcrumbItem>
           ))}
         </Breadcrumb>
