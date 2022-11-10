@@ -1,30 +1,33 @@
 import { Box, Button, CloseButton, Flex, Image, Text } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getUserInfo } from '../api/githubAPI';
+import useGetUser from '../hoc/useGetUserInfoHook';
 import Layout from './Layout';
+import { Spinner } from '@chakra-ui/react';
 
 const Content = () => {
   const [user, setUser] = useState({});
   const { username } = useParams();
+  const { userInfo, isLoading, isError } = useGetUser(username);
 
   useEffect(() => {
-    const onGetUser = async username => {
-      const res = await getUserInfo(username);
-      setUser(res);
-    };
+    setUser(userInfo);
+  }, [userInfo]);
 
-    onGetUser(username);
-  }, [username]);
-
-  console.log(user);
+  if (isError)
+    return (
+      <Text mt="10rem" fontSize="25px" color="red">
+        찾는 사람이 없습니다!
+      </Text>
+    );
+  if (isLoading) return <Spinner mt="10rem" />;
 
   return (
     <Layout>
       <Box w="300px">
         <Flex m={4} flexDirection="column" alignItems="center" justifyContent="center">
           <CloseButton onClick={() => window.location.replace('/search')} />
-          <Image fallbackSrc="https://via.placeholder.com/150" src={user.avatar_url} w={150} />
+          <Image fallbackSrc="https://via.placeholder.com/150" src={user?.avatar_url} w={150} />
           <Text as="b" fontSize="2xl">
             {user?.login}
           </Text>
