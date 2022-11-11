@@ -93,7 +93,7 @@ const Header = () => {
         <Breadcrumb>
           {usersList?.map(user => (
             <BreadcrumbItem key={user.id}>
-              <BreadcrumbLink onClick={() => navigate(`/search/${user.github}`)}>
+              <BreadcrumbLink fontSize="15px" onClick={() => navigate(`/search/${user.github}`)}>
                 {user.user}
               </BreadcrumbLink>
             </BreadcrumbItem>
