@@ -28,7 +28,6 @@ const Header = () => {
   }, [history]);
 
   const onAddHistory = text => {
-    console.log('text', text);
     const newHistory = {
       id: Date.now(),
       text: text,
