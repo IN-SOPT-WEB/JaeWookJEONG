@@ -12,7 +12,7 @@ const App = () => {
   const [modal, setModal] = useState(false);
   const [quiz, setQuiz] = useState(false);
 
-  const onScore = answer => {
+  const handleScore = answer => {
     if (answer === quizList[score].answer) {
       if (score === quizList.length - 1) {
         setIsFinish(!isFinish);
@@ -26,19 +26,19 @@ const App = () => {
     setModal(true);
   };
 
-  const onReset = () => {
+  const handleReset = () => {
     setScore(0);
     setIsFinish(false);
   };
 
-  const onClose = () => {
+  const handleClose = () => {
     setModal(false);
   };
 
   return (
     <>
       <GlobalStyles />
-      {modal && <Modal onClose={onClose} quiz={quiz} setModal={setModal} />}
+      {modal && <Modal handleClose={handleClose} quiz={quiz} setModal={setModal} />}
       <Container>
         <HeaderBlock>월드컵에 과몰입 해보자!</HeaderBlock>
         <ContentBlock>
@@ -48,18 +48,18 @@ const App = () => {
               <Image src={quizList[score].src} alt={quizList[score].alt} />
               <ButtonBlock>
                 {quizAnswer.map(quiz => (
-                  <CheckButton key={quiz.id} onClick={() => onScore(quiz.answer)}>
+                  <CheckButton key={quiz.id} onClick={() => handleScore(quiz.answer)}>
                     {quiz.answer}
                   </CheckButton>
                 ))}
               </ButtonBlock>
-              <ResetButton onClick={onReset}>재도전</ResetButton>
+              <ResetButton onClick={handleReset}>재도전</ResetButton>
             </>
           ) : (
             <>
               <ScoreBlock>대한민국 퐈이팅~</ScoreBlock>
               <Image src="img/Worldcup.jpeg" alt="finalImage" />
-              <ResetButton onClick={onReset}>재도전</ResetButton>
+              <ResetButton onClick={handleReset}>재도전</ResetButton>
             </>
           )}
         </ContentBlock>

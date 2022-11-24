@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import Button from './components/Button';
 import palette from './style/palette';
 
-const Modal = ({ onClose, quiz, setModal }) => {
+const Modal = ({ handleClose, quiz, setModal }) => {
   const modelEl = useRef();
 
   useEffect(() => {
@@ -23,12 +23,12 @@ const Modal = ({ onClose, quiz, setModal }) => {
       {quiz === true ? (
         <WhiteBox correct>
           <Title>정답입니다!</Title>
-          <CloseButton onClick={onClose}>닫기</CloseButton>
+          <CloseButton onClick={handleClose}>닫기</CloseButton>
         </WhiteBox>
       ) : (
         <WhiteBox>
           <Title>땡,,,</Title>
-          <CloseButton onClick={onClose}>닫기</CloseButton>
+          <CloseButton onClick={handleClose}>닫기</CloseButton>
         </WhiteBox>
       )}
     </Container>
