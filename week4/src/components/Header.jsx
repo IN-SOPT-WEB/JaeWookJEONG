@@ -36,10 +36,7 @@ const Header = () => {
   };
 
   const onRemoveHistory = id => {
-    const removeHistory = history.filter(history => {
-      return history.id !== id;
-    });
-    setHistory(removeHistory);
+    setHistory(prev => prev.filter(item => item.id !== id));
   };
 
   const onChange = e => {
