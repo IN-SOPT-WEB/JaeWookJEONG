@@ -20,7 +20,7 @@ const Content = () => {
         찾는 사람이 없습니다!
       </Text>
     );
-  if (isLoading) return <Spinner mt="10rem" />;
+  if (isLoading) return <React.Suspense fallback={<Spinner mt="10rem" />} />;
 
   return (
     <Layout>
