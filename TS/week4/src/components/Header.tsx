@@ -23,9 +23,9 @@ const Header = () => {
     localStorage.setItem("history", JSON.stringify(histories));
   }, [histories]);
 
-  const addHistory = (text: string) => {
-    if (histories.includes(text)) return;
-    setHistories([...histories, text]);
+  const addHistory = (userId: string) => {
+    if (histories.includes(userId)) return;
+    setHistories([...histories, userId]);
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
