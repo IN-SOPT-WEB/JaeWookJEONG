@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import { getUserInfo } from '../api/githubAPI';
 
-function useGetUser(username) {
+function useGetUser(username: string) {
   const { data, error } = useSWR(`/users/${username}`, getUserInfo, { suspense: true });
 
   return {

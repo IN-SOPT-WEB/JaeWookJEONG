@@ -13,7 +13,13 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import Layout from './Layout';
-import useGetUserList from '../hoc/useGetUserList';
+import useGetUserList from '../hooks/useGetUserList';
+import { UserListData } from 'types';
+
+interface HistoryProps {
+  id: number;
+  text: string;
+}
 
 const Header = () => {
   const [inputs, setInputs] = useState('');
@@ -27,7 +33,7 @@ const Header = () => {
     localStorage.setItem('history', JSON.stringify(history));
   }, [history]);
 
-  const onAddHistory = text => {
+  const onAddHistory = (text: string) => {
     const newHistory = {
       id: Date.now(),
       text: text,
@@ -35,15 +41,18 @@ const Header = () => {
     setHistory([newHistory, ...history]);
   };
 
-  const onRemoveHistory = id => {
-    setHistory(prev => prev.filter(item => item.id !== id));
+  const onRemoveHistory = (id: number) => {
+    const removeHistory = history.filter((history: UserListData) => {
+      return history.id !== id;
+    });
+    setHistory(removeHistory);
   };
 
-  const onChange = e => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs(e.target.value);
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate(`/search/${inputs}`);
     setInputs('');
@@ -70,7 +79,7 @@ const Header = () => {
         {isOpen && (
           <Box boxShadow="base" border="1px" borderColor="gray.200" mt="10px" borderRadius="10px">
             <UnorderedList listStyleType="none">
-              {history.map(input => (
+              {history.map((input: HistoryProps) => (
                 <Flex
                   _hover={{ bg: 'lightgray' }}
                   p="10px"
@@ -87,7 +96,7 @@ const Header = () => {
           </Box>
         )}
         <Breadcrumb>
-          {usersList?.map(user => (
+          {usersList?.map((user: UserListData) => (
             <BreadcrumbItem key={user.id}>
               <BreadcrumbLink fontSize="15px" onClick={() => navigate(`/search/${user.github}`)}>
                 {user.user}

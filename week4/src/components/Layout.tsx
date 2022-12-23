@@ -1,7 +1,11 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import { Flex } from '@chakra-ui/react';
 
-const Layout = ({ children }) => {
+interface MyComponentProps {
+  children: ReactNode;
+}
+
+const Layout = ({ children }: MyComponentProps) => {
   return (
     <Flex flexDirection="column" align="center" justify="center">
       {children}
