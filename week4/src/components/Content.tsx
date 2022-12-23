@@ -21,7 +21,7 @@ const Content = () => {
         찾는 사람이 없습니다!
       </Text>
     );
-  if (isLoading) return <Spinner mt="10rem" />;
+  if (isLoading) return <Spinner mt="12rem" />;
 
   return (
     <Layout>
