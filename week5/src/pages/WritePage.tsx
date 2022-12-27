@@ -1,8 +1,35 @@
 import styled from 'styled-components';
 import { StyledButton } from '../components/Button';
 import Layout from '../components/Layout';
+import axios from 'axios';
+import { useState } from 'react';
 
 const WritePage = () => {
+  const [inputs, setInputs] = useState({
+    username: '',
+    password: '',
+    hint: '',
+    content: '',
+  });
+
+  const { username, password, hint, content } = inputs;
+
+  const onChange = (
+    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setInputs({ ...inputs, [name]: value });
+  };
+
+  const writeLetter = async () => {
+    await axios.post('/api/write', {
+      username,
+      password,
+      content,
+      hint,
+    });
+  };
+
   return (
     <Layout>
       <Styled.Header>
@@ -10,13 +37,31 @@ const WritePage = () => {
       </Styled.Header>
       <Styled.LetterForm>
         <Styled.LetterUser>
-          <Styled.LetterInput type="text" placeholder="이름을 입력해주세요" />
-          <Styled.LetterInput type="password" placeholder="비밀번호를 입력해주세요" />
-          <Styled.LetterInput type="text" placeholder="비밀번호 힌트를 입력해주세요" />
+          <Styled.LetterInput
+            type="text"
+            value={username}
+            name="username"
+            onChange={onChange}
+            placeholder="이름을 입력해주세요"
+          />
+          <Styled.LetterInput
+            type="password"
+            name="password"
+            value={password}
+            onChange={onChange}
+            placeholder="비밀번호를 입력해주세요"
+          />
+          <Styled.LetterInput
+            type="text"
+            value={hint}
+            name="hint"
+            onChange={onChange}
+            placeholder="비밀번호 힌트를 입력해주세요"
+          />
         </Styled.LetterUser>
-        <Styled.LetterContent />
+        <Styled.LetterContent name="content" value={content} onChange={onChange} />
         <Styled.LetterButtonBlock>
-          <StyledButton>발송~</StyledButton>
+          <StyledButton onClick={writeLetter}>발송~</StyledButton>
         </Styled.LetterButtonBlock>
       </Styled.LetterForm>
     </Layout>
