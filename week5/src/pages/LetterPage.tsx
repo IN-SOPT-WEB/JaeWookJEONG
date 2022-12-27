@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { StyledButton } from '../components/Button';
 import Layout from '../components/Layout';
 import { useGetLetterHook } from '../hooks/useGetLetterHook';
+import Letter from '../assets/Letter.jpg';
 
 const LetterPage = () => {
   const { letters } = useGetLetterHook();
@@ -17,7 +18,8 @@ const LetterPage = () => {
       <Styled.Content>
         {letters?.map((letter, idx) => (
           <Styled.LetterItem key={idx} onClick={() => navigate(`/content/${idx}`)}>
-            <Styled.ContentText>{letter.username}</Styled.ContentText>
+            <Styled.LetterImage src={Letter} alt="letter" />
+            <Styled.ContentText>작성자 : {letter.username}</Styled.ContentText>
           </Styled.LetterItem>
         ))}
       </Styled.Content>
@@ -44,13 +46,20 @@ const Styled = {
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
   `,
-  ContentText: styled.h2`
-    margin: 0;
-  `,
   LetterItem: styled.div`
-    border: 1px solid ${({ theme }) => theme.colors.red};
-    height: 200px;
-    text-align: center;
-    line-height: 200px;
+    border: 5px dashed ${({ theme }) => theme.colors.red};
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+  `,
+  ContentText: styled.span`
+    padding: 1rem 0 0 1rem;
+    font-size: 18px;
+    font-weight: bold;
+  `,
+  LetterImage: styled.img`
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
   `,
 };

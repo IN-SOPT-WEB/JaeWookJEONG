@@ -48,7 +48,9 @@ const ContentPage = () => {
         </Styled.CheckPassword>
       ) : (
         <Styled.Content>
-          <Styled.ContentTitle>글쓴이 : {letters?.[IntLetterId]?.username}</Styled.ContentTitle>
+          <Styled.ContentTitleBlock>
+            <Styled.ContentTitle>작성자 : {letters?.[IntLetterId]?.username}</Styled.ContentTitle>
+          </Styled.ContentTitleBlock>
           <Styled.ContentTitle> {letters?.[IntLetterId]?.content}</Styled.ContentTitle>
         </Styled.Content>
       )}
@@ -69,6 +71,9 @@ const Styled = {
   PasswordInput: styled.input``,
   PasswordForm: styled.form``,
   Content: styled.div``,
+  ContentTitleBlock: styled.div`
+    border-bottom: 5px dashed ${({ theme }) => theme.colors.red};
+  `,
   ContentTitle: styled.h2``,
   ContentText: styled.p``,
 };
