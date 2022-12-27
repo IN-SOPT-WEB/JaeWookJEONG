@@ -7,15 +7,17 @@ import { getUserInfo } from 'api/githubAPI';
 
 const Content = () => {
   const [user, setUser] = useState<UserGithubData>();
-  const { username } = useParams() as { username: string };
+  const { username } = useParams();
 
   useEffect(() => {
-    const handleUserInfo = async () => {
-      const res = await getUserInfo(username);
-      setUser(res);
-    };
+    if (username) {
+      const handleUserInfo = async () => {
+        const res = await getUserInfo(username);
+        setUser(res);
+      };
 
-    handleUserInfo();
+      handleUserInfo();
+    }
   }, [username]);
 
   return (

@@ -16,7 +16,7 @@ import Layout from './Layout';
 import { UserListData } from 'types';
 import { getUserList } from 'api/githubAPI';
 
-interface HistoryProps {
+interface HistoryInfo {
   id: number;
   text: string;
 }
@@ -83,27 +83,27 @@ const Header = () => {
         {isOpen && (
           <Box boxShadow="base" border="1px" borderColor="gray.200" mt="10px" borderRadius="10px">
             <UnorderedList listStyleType="none">
-              {history.map((input: HistoryProps) => (
+              {history.map(({ id, text }: HistoryInfo) => (
                 <Flex
                   _hover={{ bg: 'lightgray' }}
                   p="10px"
                   justifyContent="space-between"
                   alignItems="center"
                 >
-                  <ListItem key={input.id} onClick={() => navigate(`/search/${input.text}`)}>
-                    {input.text}
+                  <ListItem key={id} onClick={() => navigate(`/search/${text}`)}>
+                    {text}
                   </ListItem>
-                  <CloseButton onClick={() => onRemoveHistory(input.id)} />
+                  <CloseButton onClick={() => onRemoveHistory(id)} />
                 </Flex>
               ))}
             </UnorderedList>
           </Box>
         )}
         <Breadcrumb>
-          {usersList?.map((user: UserListData) => (
-            <BreadcrumbItem key={user.id}>
-              <BreadcrumbLink fontSize="15px" onClick={() => navigate(`/search/${user.github}`)}>
-                {user.user}
+          {usersList?.map(({ id, github, user }: UserListData) => (
+            <BreadcrumbItem key={id}>
+              <BreadcrumbLink fontSize="15px" onClick={() => navigate(`/search/${github}`)}>
+                {user}
               </BreadcrumbLink>
             </BreadcrumbItem>
           ))}
