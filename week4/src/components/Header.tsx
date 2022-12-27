@@ -13,8 +13,8 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import Layout from './Layout';
-import useGetUserList from '../hooks/useGetUserList';
 import { UserListData } from 'types';
+import { getUserList } from 'api/githubAPI';
 
 interface HistoryProps {
   id: number;
@@ -27,7 +27,6 @@ const Header = () => {
   const [history, setHistory] = useState(JSON.parse(localStorage.getItem('history') || '[]'));
   const [usersList, setUsersList] = useState([]);
   const navigate = useNavigate();
-  const { userList } = useGetUserList();
 
   useEffect(() => {
     localStorage.setItem('history', JSON.stringify(history));
@@ -61,8 +60,13 @@ const Header = () => {
   };
 
   useEffect(() => {
-    setUsersList(userList?.items);
-  }, [userList]);
+    const handleUserList = async () => {
+      const res = await getUserList();
+      setUsersList(res.items);
+    };
+
+    handleUserList();
+  }, []);
 
   return (
     <Layout>
