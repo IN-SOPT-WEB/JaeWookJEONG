@@ -1,5 +1,11 @@
 import axios from 'axios';
 import { instance } from './customAPI';
 
-export const getUserList = (url: string) => axios.get(url).then(response => response.data);
-export const getUserInfo = (url: string) => instance.get(url).then(response => response.data);
+export const getUserList = async () => {
+  const response = await axios.get('/api/users');
+  return response.data;
+};
+export const getUserInfo = async (props: string) => {
+  const response = await instance.get(`/users/${props}`);
+  return response.data;
+};
