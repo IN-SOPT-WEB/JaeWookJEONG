@@ -1,7 +1,7 @@
 import { rest } from 'msw';
-import { LetterProps } from '../types';
+import { LetterInfo } from '../types';
 
-const letters = [
+const letterList = [
   {
     username: '정재욱',
     password: '1129',
@@ -13,7 +13,7 @@ const handlers = [
   rest.get('/api/letters', async (req, res, ctx) => {
     return res(ctx.status(200), ctx.delay(400), ctx.json(localStorage.getItem('letters')));
   }),
-  rest.post<LetterProps>('/api/write', async (req, res, ctx) => {
+  rest.post<LetterInfo>('/api/write', async (req, res, ctx) => {
     const { username, password, content, hint } = await req.json();
 
     const newLetter = {
@@ -23,8 +23,8 @@ const handlers = [
       hint,
     };
 
-    letters.push(newLetter);
-    localStorage.setItem('letters', JSON.stringify(letters));
+    letterList.push(newLetter);
+    localStorage.setItem('letters', JSON.stringify(letterList));
 
     return res(ctx.status(200), ctx.delay(400));
   }),

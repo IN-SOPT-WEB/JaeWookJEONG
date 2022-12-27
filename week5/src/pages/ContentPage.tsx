@@ -1,21 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { StyledInput } from '../components/Input';
 import Layout from '../components/Layout';
 import { useGetLetterHook } from '../hooks/useGetLetterHook';
 
+interface LetterIdLocation {
+  state: { letterId: number };
+}
+
 const ContentPage = () => {
   const [input, setInput] = useState('');
-  const [IntLetterId, setIntLetterId] = useState<number>(0);
   const [check, setCheck] = useState<boolean>(false);
-  const { letterId } = useParams();
-  const { letters } = useGetLetterHook();
-
-  useEffect(() => {
-    if (letterId === undefined) return;
-    setIntLetterId(parseInt(letterId));
-  }, [letterId]);
+  const { letterList } = useGetLetterHook();
+  const { state } = useLocation() as LetterIdLocation;
+  const { letterId } = state;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -23,11 +22,13 @@ const ContentPage = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (letterId === undefined) return;
-    if (input === letters?.[IntLetterId].password) {
-      setCheck(true);
-    } else {
-      setCheck(false);
+    if (letterId) {
+      if (input === letterList[letterId].password) {
+        setCheck(true);
+      } else {
+        setCheck(false);
+        alert('비밀번호 틀렸다!');
+      }
     }
   };
 
@@ -36,7 +37,7 @@ const ContentPage = () => {
       {check === false ? (
         <Styled.CheckPassword>
           <Styled.PasswordForm onSubmit={onSubmit}>
-            <Styled.PasswordText>hint : {letters?.[IntLetterId]?.hint}</Styled.PasswordText>
+            <Styled.PasswordText>hint : {letterList[letterId]?.hint}</Styled.PasswordText>
             <StyledInput
               fullWidth="fullWidth"
               type="password"
@@ -49,9 +50,9 @@ const ContentPage = () => {
       ) : (
         <Styled.Content>
           <Styled.ContentTitleBlock>
-            <Styled.ContentTitle>작성자 : {letters?.[IntLetterId]?.username}</Styled.ContentTitle>
+            <Styled.ContentTitle>작성자 : {letterList[letterId]?.username}</Styled.ContentTitle>
           </Styled.ContentTitleBlock>
-          <Styled.ContentTitle> {letters?.[IntLetterId]?.content}</Styled.ContentTitle>
+          <Styled.ContentTitle> {letterList[letterId]?.content}</Styled.ContentTitle>
         </Styled.Content>
       )}
     </Layout>

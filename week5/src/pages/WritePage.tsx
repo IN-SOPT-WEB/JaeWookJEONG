@@ -24,7 +24,7 @@ const WritePage = () => {
     setInputs({ ...inputs, [name]: value });
   };
 
-  const writeLetter = async () => {
+  const sendLetter = async () => {
     await axios.post('/api/write', {
       username,
       password,
@@ -65,7 +65,9 @@ const WritePage = () => {
         </Styled.LetterUser>
         <Styled.LetterContent name="content" value={content} onChange={onChange} />
         <Styled.LetterButtonBlock>
-          <StyledButton onClick={writeLetter}>발송~</StyledButton>
+          <StyledButton type="button" onClick={sendLetter}>
+            발송~
+          </StyledButton>
         </Styled.LetterButtonBlock>
       </Styled.LetterForm>
     </Layout>
@@ -79,7 +81,7 @@ const Styled = {
     width: 100%;
   `,
   Title: styled.h2``,
-  LetterForm: styled.div`
+  LetterForm: styled.form`
     width: 100%;
   `,
   LetterUser: styled.div`

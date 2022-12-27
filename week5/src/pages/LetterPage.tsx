@@ -6,7 +6,7 @@ import { useGetLetterHook } from '../hooks/useGetLetterHook';
 import Letter from '../assets/Letter.jpg';
 
 const LetterPage = () => {
-  const { letters } = useGetLetterHook();
+  const { letterList } = useGetLetterHook();
   const navigate = useNavigate();
 
   return (
@@ -16,10 +16,13 @@ const LetterPage = () => {
         <StyledButton onClick={() => navigate('/write')}>편지쓰기</StyledButton>
       </Styled.Header>
       <Styled.Content>
-        {letters?.map((letter, idx) => (
-          <Styled.LetterItem key={idx} onClick={() => navigate(`/content/${idx}`)}>
+        {letterList?.map(({ username }, idx) => (
+          <Styled.LetterItem
+            key={idx}
+            onClick={() => navigate(`/content/${idx}`, { state: { letterId: idx } })}
+          >
             <Styled.LetterImage src={Letter} alt="letter" />
-            <Styled.ContentText>작성자 : {letter.username}</Styled.ContentText>
+            <Styled.ContentText>작성자 : {username}</Styled.ContentText>
           </Styled.LetterItem>
         ))}
       </Styled.Content>
@@ -30,7 +33,7 @@ const LetterPage = () => {
 export default LetterPage;
 
 const Styled = {
-  Header: styled.div`
+  Header: styled.header`
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -40,7 +43,7 @@ const Styled = {
   Title: styled.h2`
     text-align: center;
   `,
-  Content: styled.div`
+  Content: styled.article`
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);

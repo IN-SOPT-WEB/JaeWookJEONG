@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { LetterProps } from '../types';
+import { LetterInfo } from '../types';
 
 export const useGetLetterHook = () => {
-  const [letters, setLetter] = useState<LetterProps[]>([]);
+  const [letterList, setLetterList] = useState<LetterInfo[]>([]);
 
   useEffect(() => {
     const getLetter = async () => {
       const response = await axios.get('/api/letters');
-      setLetter(JSON.parse(response.data));
+      setLetterList(JSON.parse(response.data));
     };
 
     getLetter();
   }, []);
 
-  return { letters };
+  return { letterList };
 };

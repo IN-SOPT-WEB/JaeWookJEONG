@@ -13,7 +13,7 @@ export default Layout;
 
 const Styled = {
   Root: styled.div`
-    width: 1440px;
+    width: 90rem;
     padding: 0 1rem;
     margin: 0 auto;
   `,

@@ -14,5 +14,5 @@ export const StyledInput = styled.input<InputProps>`
     margin-top: 1rem;
   }
 
-  width: ${props => (props.fullWidth ? '100%' : '40%')};
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : '40%')};
 `;
