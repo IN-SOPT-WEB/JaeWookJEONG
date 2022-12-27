@@ -14,12 +14,11 @@ const LetterPage = () => {
   useEffect(() => {
     const getLetter = async () => {
       const response = await axios.get('/api/letters');
-      setLetters(response.data);
+      setLetters(JSON.parse(response.data));
     };
 
     getLetter();
   }, []);
-
   return (
     <Layout>
       <Styled.Header>
@@ -29,7 +28,7 @@ const LetterPage = () => {
       <Styled.Content>
         {letters?.map((letter, idx) => (
           <Styled.LetterItem key={idx}>
-            <Styled.ContentText>열고싶지</Styled.ContentText>
+            <Styled.ContentText>{letter.username}</Styled.ContentText>
           </Styled.LetterItem>
         ))}
       </Styled.Content>
