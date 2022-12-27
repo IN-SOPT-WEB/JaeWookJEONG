@@ -1,5 +1,5 @@
 export interface LetterProps {
-  name: string;
+  username: string;
   password: string;
   content: string;
   hint: string;
