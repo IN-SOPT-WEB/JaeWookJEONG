@@ -3,6 +3,8 @@ import { StyledButton } from '../components/Button';
 import Layout from '../components/Layout';
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { StyledInput } from '../components/Input';
 
 const WritePage = () => {
   const [inputs, setInputs] = useState({
@@ -11,6 +13,7 @@ const WritePage = () => {
     hint: '',
     content: '',
   });
+  const navigate = useNavigate();
 
   const { username, password, hint, content } = inputs;
 
@@ -28,6 +31,7 @@ const WritePage = () => {
       content,
       hint,
     });
+    navigate('/');
   };
 
   return (
@@ -37,21 +41,21 @@ const WritePage = () => {
       </Styled.Header>
       <Styled.LetterForm>
         <Styled.LetterUser>
-          <Styled.LetterInput
+          <StyledInput
             type="text"
             value={username}
             name="username"
             onChange={onChange}
             placeholder="이름을 입력해주세요"
           />
-          <Styled.LetterInput
+          <StyledInput
             type="password"
             name="password"
             value={password}
             onChange={onChange}
             placeholder="비밀번호를 입력해주세요"
           />
-          <Styled.LetterInput
+          <StyledInput
             type="text"
             value={hint}
             name="hint"
@@ -83,17 +87,6 @@ const Styled = {
     flex-direction: column;
     margin-bottom: 1rem;
   `,
-  LetterInput: styled.input`
-    width: 40%;
-    outline: none;
-    padding: 0.3rem;
-    border-radius: 7px;
-    border: 1px solid ${({ theme }) => theme.colors.green};
-
-    & + & {
-      margin-top: 1rem;
-    }
-  `,
   LetterContent: styled.textarea`
     width: 100%;
     height: 300px;
@@ -106,5 +99,4 @@ const Styled = {
     display: flex;
     justify-content: flex-end;
   `,
-  LetterButton: styled.button``,
 };

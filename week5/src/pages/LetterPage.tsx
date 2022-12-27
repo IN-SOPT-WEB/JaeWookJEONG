@@ -1,24 +1,13 @@
-import { useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { StyledButton } from '../components/Button';
 import Layout from '../components/Layout';
-import { useState } from 'react';
-import { LetterProps } from '../types';
+import { useGetLetterHook } from '../hooks/useGetLetterHook';
 
 const LetterPage = () => {
-  const [letters, setLetters] = useState<LetterProps[]>();
+  const { letters } = useGetLetterHook();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const getLetter = async () => {
-      const response = await axios.get('/api/letters');
-      setLetters(JSON.parse(response.data));
-    };
-
-    getLetter();
-  }, []);
   return (
     <Layout>
       <Styled.Header>
@@ -27,7 +16,7 @@ const LetterPage = () => {
       </Styled.Header>
       <Styled.Content>
         {letters?.map((letter, idx) => (
-          <Styled.LetterItem key={idx}>
+          <Styled.LetterItem key={idx} onClick={() => navigate(`/content/${idx}`)}>
             <Styled.ContentText>{letter.username}</Styled.ContentText>
           </Styled.LetterItem>
         ))}
