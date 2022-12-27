@@ -23,7 +23,7 @@ const handlers = [
       hint,
     };
 
-    const text = localStorage.getItem('letters');
+    letters.push(newLetter);
     localStorage.setItem('letters', JSON.stringify(letters));
 
     return res(ctx.status(200), ctx.delay(400));
