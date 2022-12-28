@@ -13,7 +13,13 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import Layout from './Layout';
-import useGetUserList from '../hoc/useGetUserList';
+import { UserListData } from 'types';
+import { getUserList } from 'api/githubAPI';
+
+interface HistoryInfo {
+  id: number;
+  text: string;
+}
 
 const Header = () => {
   const [inputs, setInputs] = useState('');
@@ -21,13 +27,12 @@ const Header = () => {
   const [history, setHistory] = useState(JSON.parse(localStorage.getItem('history') || '[]'));
   const [usersList, setUsersList] = useState([]);
   const navigate = useNavigate();
-  const { userList } = useGetUserList();
 
   useEffect(() => {
     localStorage.setItem('history', JSON.stringify(history));
   }, [history]);
 
-  const onAddHistory = text => {
+  const onAddHistory = (text: string) => {
     const newHistory = {
       id: Date.now(),
       text: text,
@@ -35,15 +40,18 @@ const Header = () => {
     setHistory([newHistory, ...history]);
   };
 
-  const onRemoveHistory = id => {
-    setHistory(prev => prev.filter(item => item.id !== id));
+  const onRemoveHistory = (id: number) => {
+    const removeHistory = history.filter((history: UserListData) => {
+      return history.id !== id;
+    });
+    setHistory(removeHistory);
   };
 
-  const onChange = e => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs(e.target.value);
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate(`/search/${inputs}`);
     setInputs('');
@@ -52,8 +60,13 @@ const Header = () => {
   };
 
   useEffect(() => {
-    setUsersList(userList?.items);
-  }, [userList]);
+    const handleUserList = async () => {
+      const res = await getUserList();
+      setUsersList(res.items);
+    };
+
+    handleUserList();
+  }, []);
 
   return (
     <Layout>
@@ -70,27 +83,27 @@ const Header = () => {
         {isOpen && (
           <Box boxShadow="base" border="1px" borderColor="gray.200" mt="10px" borderRadius="10px">
             <UnorderedList listStyleType="none">
-              {history.map(input => (
+              {history.map(({ id, text }: HistoryInfo) => (
                 <Flex
                   _hover={{ bg: 'lightgray' }}
                   p="10px"
                   justifyContent="space-between"
                   alignItems="center"
                 >
-                  <ListItem key={input.id} onClick={() => navigate(`/search/${input.text}`)}>
-                    {input.text}
+                  <ListItem key={id} onClick={() => navigate(`/search/${text}`)}>
+                    {text}
                   </ListItem>
-                  <CloseButton onClick={() => onRemoveHistory(input.id)} />
+                  <CloseButton onClick={() => onRemoveHistory(id)} />
                 </Flex>
               ))}
             </UnorderedList>
           </Box>
         )}
         <Breadcrumb>
-          {usersList?.map(user => (
-            <BreadcrumbItem key={user.id}>
-              <BreadcrumbLink fontSize="15px" onClick={() => navigate(`/search/${user.github}`)}>
-                {user.user}
+          {usersList?.map(({ id, github, user }: UserListData) => (
+            <BreadcrumbItem key={id}>
+              <BreadcrumbLink fontSize="15px" onClick={() => navigate(`/search/${github}`)}>
+                {user}
               </BreadcrumbLink>
             </BreadcrumbItem>
           ))}

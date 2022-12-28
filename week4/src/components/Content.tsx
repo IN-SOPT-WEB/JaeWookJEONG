@@ -1,26 +1,24 @@
 import { Box, Button, CloseButton, Flex, Image, Text } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import useGetUser from '../hoc/useGetUserInfoHook';
 import Layout from './Layout';
-import { Spinner } from '@chakra-ui/react';
+import { UserGithubData } from 'types';
+import { getUserInfo } from 'api/githubAPI';
 
 const Content = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<UserGithubData>();
   const { username } = useParams();
-  const { userInfo, isLoading, isError } = useGetUser(username);
 
   useEffect(() => {
-    setUser(userInfo);
-  }, [userInfo]);
+    if (username) {
+      const handleUserInfo = async () => {
+        const res = await getUserInfo(username);
+        setUser(res);
+      };
 
-  if (isError)
-    return (
-      <Text mt="10rem" fontSize="25px" color="red">
-        찾는 사람이 없습니다!
-      </Text>
-    );
-  if (isLoading) return <React.Suspense fallback={<Spinner mt="10rem" />} />;
+      handleUserInfo();
+    }
+  }, [username]);
 
   return (
     <Layout>
@@ -32,7 +30,7 @@ const Content = () => {
             {user?.login}
           </Text>
           <Text as="b">{user?.name}</Text>
-          <Button variant="outline" onClick={() => window.open(user.html_url, '_blank')}>
+          <Button variant="outline" onClick={() => window.open(user?.html_url, '_blank')}>
             visit
           </Button>
           <Flex w="100%" justifyContent="space-between">
