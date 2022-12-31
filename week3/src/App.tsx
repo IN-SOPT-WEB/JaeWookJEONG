@@ -53,13 +53,17 @@ const App = () => {
                   </CheckButton>
                 ))}
               </ButtonBlock>
-              <ResetButton onClick={handleReset}>재도전</ResetButton>
+              <ResetButton type="button" onClick={handleReset}>
+                재도전
+              </ResetButton>
             </>
           ) : (
             <>
               <ScoreBlock>대한민국 퐈이팅~</ScoreBlock>
               <Image src={WorldCup} alt="finalImage" />
-              <ResetButton onClick={handleReset}>재도전</ResetButton>
+              <ResetButton type="button" onClick={handleReset}>
+                재도전
+              </ResetButton>
             </>
           )}
         </ContentBlock>
@@ -102,7 +106,7 @@ const ButtonBlock = styled.div`
 const CheckButton = styled(StyledButton)`
   background-color: white;
   border: 1px solid #70193d;
-  border-radius: 7px;
+  border-radius: 0.4rem;
   padding: 0.3rem;
 
   &:hover {
