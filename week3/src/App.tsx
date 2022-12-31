@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import Button from './components/Button';
+import { StyledButton } from './components/Button';
 import Modal from './Modal';
 import { quizAnswer, quizList } from './quizAnswer';
 import GlobalStyles from './style/GlobalStyles';
-import palette from './style/palette';
+import WorldCup from './assets/image/Worldcup.jpeg';
 
 const App = () => {
   const [score, setScore] = useState(0);
   const [isFinish, setIsFinish] = useState(false);
-  const [modal, setModal] = useState(false);
-  const [quiz, setQuiz] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+  const [isQuiz, setIsQuiz] = useState(false);
 
-  const handleScore = answer => {
+  const handleScore = (answer: string) => {
     if (answer === quizList[score].answer) {
       if (score === quizList.length - 1) {
         setIsFinish(!isFinish);
         setScore(0);
       }
-      setQuiz(true);
+      setIsQuiz(true);
       setScore(score + 1);
     } else {
-      setQuiz(false);
+      setIsQuiz(false);
     }
-    setModal(true);
+    setIsModal(true);
   };
 
   const handleReset = () => {
@@ -31,14 +31,14 @@ const App = () => {
     setIsFinish(false);
   };
 
-  const handleClose = () => {
-    setModal(false);
+  const handleModalClose = () => {
+    setIsModal(false);
   };
 
   return (
     <>
       <GlobalStyles />
-      {modal && <Modal handleClose={handleClose} quiz={quiz} setModal={setModal} />}
+      {isModal && <Modal handleModalClose={handleModalClose} isQuiz={isQuiz} />}
       <Container>
         <HeaderBlock>월드컵에 과몰입 해보자!</HeaderBlock>
         <ContentBlock>
@@ -53,13 +53,17 @@ const App = () => {
                   </CheckButton>
                 ))}
               </ButtonBlock>
-              <ResetButton onClick={handleReset}>재도전</ResetButton>
+              <ResetButton type="button" onClick={handleReset}>
+                재도전
+              </ResetButton>
             </>
           ) : (
             <>
               <ScoreBlock>대한민국 퐈이팅~</ScoreBlock>
-              <Image src="img/Worldcup.jpeg" alt="finalImage" />
-              <ResetButton onClick={handleReset}>재도전</ResetButton>
+              <Image src={WorldCup} alt="finalImage" />
+              <ResetButton type="button" onClick={handleReset}>
+                재도전
+              </ResetButton>
             </>
           )}
         </ContentBlock>
@@ -99,23 +103,23 @@ const ButtonBlock = styled.div`
   margin: 1rem 0;
 `;
 
-const CheckButton = styled(Button)`
+const CheckButton = styled(StyledButton)`
   background-color: white;
-  border: 1px solid ${palette.mainColor};
-  border-radius: 7px;
+  border: 1px solid #70193d;
+  border-radius: 0.4rem;
   padding: 0.3rem;
 
   &:hover {
-    background-color: ${palette.mainColor};
+    background-color: #70193d;
     color: white;
     font-weight: bold;
   }
 `;
-const ResetButton = styled(Button)`
+const ResetButton = styled(StyledButton)`
   width: 100%;
   padding: 0.5rem 0;
   font-weight: 600;
-  background-color: ${palette.mainColor};
+  background-color: #70193d;
   color: white;
   border-radius: 7px;
 `;
